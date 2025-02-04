@@ -1,83 +1,47 @@
+<%@ page import="java.util.List" %>
+<%@ page import="aze.coders.spring.mvc.domains.Category" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="aze.coders.spring.mvc.repositories.CategoryRepository" %>
+<%@ page import="aze.coders.spring.mvc.repositories.impl.CategoryRepositoryImpl" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Category List</title>
+    <title>aze.coders.spring.mvc.domains.Category</title>
 </head>
+<%
+    CategoryRepository categoryRepository = new CategoryRepositoryImpl();
+    List<Category> categories = categoryRepository.findAll();
+%>
 <body>
-<h2>Hello World!</h2>
-efderg
-rhgtff
-
-
-fdgtfrdghb
-efderg rhgtff fdgtfrdghb
-<pre>
-   efderg
-rhgtff
-
-
-
-fdgtfrdghb
-</pre>
-<p style="font-size: large;color: firebrick">sfdfbdf</p>
-<ul>
-    <li>1 element</li>
-    <li>2 element</li>
-</ul>
-<ol>
-    <li>1 element</li>
-    <li>2 element</li>
-</ol>
-<ol type="A">
-    <li>1 element</li>
-    <li>2 element</li>
-</ol>
-<ol type="a">
-    <li>1 element</li>
-    <li>2 element</li>
-</ol>
-<ol type="1">
-    <li>1 element</li>
-    <li>2 element</li>
-</ol>
-<ol type="I">
-    <li>1 element</li>
-    <li>2 element</li>
-</ol>
-<ol type="i">
-    <li>1 element</li>
-    <li>2 element</li>
-</ol>
-<table>
-    <thead>
+<label>Name: </label>
+<input type="text" name="nameTxt" placeholder="Axtaris edeceyiniz adi daxil edin" required>
+<input type="submit" name="searchBtn" value="Search">
+<form action="createForm.jsp" method="get">
+    <input type="submit" name="addBtn" value="Add">
+</form>
+<br/>
+<table style="border: red">
+    <thead style="border: red">
     <tr>
-        <th>Ad</th>
-        <th>Soyad</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="border: red">
+    <%for (Category category : categories) {%>
     <tr>
-        <td>Gulnar</td>
-        <td>Salehova</td>
+        <td><%=category.getId()%>
+        </td>
+        <td><%=category.getName()%>
+        </td>
+        <td><%=category.getDescription()%>
+        </td>
+        <td><input type="submit" value="Edit" name="editSbm"></td>
+        <td><input type="submit" value="Delete" name="editSbm"></td>
     </tr>
-    <tr>
-        <td>Fidan</td>
-        <td>Eyvazova</td>
-    </tr>
+    <%}%>
     </tbody>
-    <tfoot>
-        <tr>
-            <td>foot ad</td>
-            <td>foot soyad</td>
-        </tr>
-    </tfoot>
 </table>
-    <a href="https://stackoverflow.com/questions/50959094/spring-boot-extend-existing-properties-class-with-new-prefix">stackoverflow
-    kecid default</a>
-<a href="https://stackoverflow.com/questions/50959094/spring-boot-extend-existing-properties-class-with-new-prefix" target="_blank">stackoverflow
-   kecid blank</a>
-<br/>
-<br/>
-<br/>
-<a href="https://stackoverflow.com/questions/50959094/spring-boot-extend-existing-properties-class-with-new-prefix" target="_self">stackoverflow kecid self</a>
 </body>
 </html>
