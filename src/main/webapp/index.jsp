@@ -9,13 +9,21 @@
     <title>aze.coders.spring.mvc.domains.Category</title>
 </head>
 <%
-    CategoryRepository categoryRepository = new CategoryRepositoryImpl();
-    List<Category> categories = categoryRepository.findAll();
+    Object obj = session.getAttribute("categories");
+    List<Category> categories;
+    if (obj != null && obj instanceof List)
+        categories = (List<Category>) obj;
+    else {
+        CategoryRepository categoryRepository = new CategoryRepositoryImpl();
+        categories = categoryRepository.findAll();
+    }
 %>
 <body>
 <label>Name: </label>
-<input type="text" name="nameTxt" placeholder="Axtaris edeceyiniz adi daxil edin" required>
-<input type="submit" name="searchBtn" value="Search">
+<form action="search.jsp" method="get">
+    <input type="text" name="name" placeholder="Axtaris edeceyiniz adi daxil edin" required>
+    <input type="submit" name="searchBtn" value="Search">
+</form>
 <form action="createForm.jsp" method="get">
     <input type="submit" name="addBtn" value="Add">
 </form>
@@ -37,8 +45,18 @@
         </td>
         <td><%=category.getDescription()%>
         </td>
-        <td><input type="submit" value="Edit" name="editSbm"></td>
-        <td><input type="submit" value="Delete" name="editSbm"></td>
+        <td>
+            <form action="updateForm.jsp" method="get">
+                <input type="submit" name="update" value="Edit">
+                <input type="hidden" name="id" value=<%=category.getId()%>>
+            </form>
+        </td>
+        <td>
+            <form action="delete.jsp" method="get">
+                <input type="submit" name="delete" value="Delete">
+                <input type="hidden" name="id" value=<%=category.getId()%>>
+            </form>
+        </td>
     </tr>
     <%}%>
     </tbody>

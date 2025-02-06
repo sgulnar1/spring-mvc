@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CategoryRepositoryImpl implements CategoryRepository {
     private static final List<Category> categories = new ArrayList<Category>();
-    {
+    static {
         for (int i = 1; i <= 20; i++)
             categories.add(new Category(i, "name " + i, "desc " + i));
 
@@ -38,6 +38,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<Category> findByName(String name) {
+        System.out.println("name");
         return categories.stream().filter(category -> category.getName().equalsIgnoreCase(name)).toList();
     }
 
